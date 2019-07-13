@@ -14,7 +14,7 @@ export default function booksReducer(state = initialState, action) {
 		case REMOVE_BOOK:
 			return state.filter(book => book.id !== action.payload.id)
 		case REPLACE_BOOK:
-			return state.map(book => {
+			return state.books.map(book => {
 				if (book.id === action.payload.id) {
 					return {
 						...book,

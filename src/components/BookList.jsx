@@ -4,7 +4,7 @@ import { Link, } from 'react-router-dom'
 
 class BookList extends Component {
 	render() {
-		if (this.props.books.length) {
+		if (this.props.books && this.props.books.length) {
 			return (
 				<div>
 					<h4>Books</h4>

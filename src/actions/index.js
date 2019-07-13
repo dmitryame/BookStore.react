@@ -58,7 +58,7 @@ export const deleteBook = id => dispatch => axios.delete(`${apiUrl}/books/${id}`
 
 export const updateBook = book => {
 	const bookId = book.id
-	return dispatch => axios.patch(`${apiUrl}/books/${book.id}`, {
+	return dispatch => axios.put(`${apiUrl}/books/${book.id}`, {
 		title: book.title, description: book.description, author: book.author, tags: book.tags,
 	})
 		.then(response => {
