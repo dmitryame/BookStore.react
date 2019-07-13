@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { createBrowserHistory, } from 'history'
 import history from '../history'
 
 export const RECEIVE_BOOKS = 'GET_BOOKS'
@@ -33,7 +34,9 @@ export const addBook = ({
 		})
 	})
 	.then(() => {
-		history.push("/books")
+		// little hacky, but really the simplest way to force reload
+		createBrowserHistory({ forceRefresh: true, }).push("/books")
+		// history.push("/books")
 	})
 	.catch(error => { throw (error) })
 
@@ -50,7 +53,8 @@ export const deleteBook = id => dispatch => axios.delete(`${apiUrl}/books/${id}`
 		dispatch({ type: REMOVE_BOOK, payload: { id, }, })
 	})
 	.then(() => {
-		history.push("/books")
+		// history.push("/books")
+		createBrowserHistory({ forceRefresh: true, }).push("/books")
 	})
 	.catch(error => {
 		throw (error)
@@ -77,7 +81,8 @@ export const updateBook = book => {
 			})
 		})
 		.then(() => {
-			history.push(`/books/${bookId}`)
+			// history.push(`/books/${bookId}`)
+			createBrowserHistory({ forceRefresh: true, }).push(`/books/${bookId}`)
 		})
 		.catch(error => { throw (error) })
 }

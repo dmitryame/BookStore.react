@@ -3,6 +3,9 @@ import { connect, } from 'react-redux'
 import { updateBook, } from '../actions'
 
 class BookEdit extends React.Component {
+  state = {
+  }
+
   handleChange = event => {
   	this.setState({ [event.target.name]: event.target.value, })
   };
@@ -34,7 +37,7 @@ class BookEdit extends React.Component {
   	return (
 	<div>
   			<h1>Edit {this.props.book.title}</h1>
-	<form onSubmit={this.handleSubmit}>
+	<form onSubmit={this.handleSubmit.bind(this)}>
 			<div className="form-group">
 			<label>Title</label>
 			<input type="text" name="title" defaultValue={this.props.book.title} onChange={this.handleChange} className="form-control" />
@@ -47,12 +50,12 @@ class BookEdit extends React.Component {
 
 			<div className="form-group">
 	<label>Description</label>
-  					<textarea name="content" rows="5" defaultValue={this.props.book.description} onChange={this.handleChange} className="form-control" />
+  					<textarea name="description" rows="5" defaultValue={this.props.book.description} onChange={this.handleChange} className="form-control" />
   				</div>
 
   				<div className="form-group">
 			<label>Tags</label>
-			<input type="text" name="tags" defaultValue={this.props.book.tags} onChange={this.handleChange} className="form-control" />
+  					<input type="text" name="tags" defaultValue={this.props.book.tags} onChange={this.handleChange} className="form-control" />
   </div>
 
 
