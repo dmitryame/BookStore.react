@@ -13,8 +13,6 @@ class BookList extends Component {
 							<hr />
 							<h4><Link to={`/books/${book.id}`}>{book.title}</Link></h4>
 							<p>{book.author}</p>
-							<p>{book.description}</p>
-							<p>{book.tags}</p>
 						</div>
 					))}
 				</div>

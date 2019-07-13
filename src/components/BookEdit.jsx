@@ -11,8 +11,12 @@ class BookEdit extends React.Component {
   	event.preventDefault()
   	const id = this.props.book.id
   	const title = this.state.title ? this.state.title : this.props.book.title
-  	const content = this.state.content ? this.state.content : this.props.book.content
-  	const book = { id, title, content, }
+  	const description = this.state.description ? this.state.description : this.props.book.description
+  	const author = this.state.author ? this.state.author : this.props.book.author
+  	const tags = this.state.tags ? this.state.tags : this.props.book.tags
+  	const book = {
+  		id, title, description, author, tags,
+  	}
   	this.props.updateBook(book)
   };
 
@@ -21,18 +25,37 @@ class BookEdit extends React.Component {
   }
 
   render() {
+  	const { book, } = this.props
+
+  	if (!book) {
+  		return <div />
+  	}
+
   	return (
 	<div>
-	<h1>Edit {this.props.book.title}</h1>
+  			<h1>Edit {this.props.book.title}</h1>
 	<form onSubmit={this.handleSubmit}>
 			<div className="form-group">
 			<label>Title</label>
 			<input type="text" name="title" defaultValue={this.props.book.title} onChange={this.handleChange} className="form-control" />
-  				</div>
+  </div>
+
+  				<div className="form-group">
+			<label>Author</label>
+  					<input type="text" name="author" defaultValue={this.props.book.author} onChange={this.handleChange} className="form-control" />
+  </div>
+
 			<div className="form-group">
-	<label>Content</label>
-	<textarea name="content" rows="5" defaultValue={this.props.book.content} onChange={this.handleChange} className="form-control" />
+	<label>Description</label>
+  					<textarea name="content" rows="5" defaultValue={this.props.book.description} onChange={this.handleChange} className="form-control" />
   				</div>
+
+  				<div className="form-group">
+			<label>Tags</label>
+			<input type="text" name="tags" defaultValue={this.props.book.tags} onChange={this.handleChange} className="form-control" />
+  </div>
+
+
 			<div className="btn-group">
 	<button type="submit" className="btn btn-dark">Update</button>
 	<button type="button" onClick={this.handleCancel} className="btn btn-secondary">Cancel</button>
@@ -43,7 +66,7 @@ class BookEdit extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ book: state.book, })
+const mapStateToProps = state => ({ book: state.book.book, })
 
 const mapDispatchToProps = { updateBook, }
 
