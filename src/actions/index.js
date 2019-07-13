@@ -9,7 +9,8 @@ export const REMOVE_BOOK = 'REMOVE_BOOK'
 export const UPDATE_BOOK = 'UPDATE_BOOK'
 export const REPLACE_BOOK = 'REPLACE_BOOK'
 
-const apiUrl = 'https://ifpj1qamaa.execute-api.us-east-1.amazonaws.com/prod'
+// const apiUrl = 'https://ifpj1qamaa.execute-api.us-east-1.amazonaws.com/prod'
+const apiUrl = 'https://bookstoreapi.wisaw.com'
 
 
 export const getBooks = () => dispatch => axios.get(`${apiUrl}/books`)
