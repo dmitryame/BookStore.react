@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import articles from './articlesReducer';
-import article from './articleReducer';
+import { combineReducers, } from 'redux'
+import books from './booksReducer'
+import book from './bookReducer'
 
 export default combineReducers({
-  articles: articles,
-  article: article,
-});
+	books,
+	book,
+})

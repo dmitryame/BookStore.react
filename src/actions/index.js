@@ -1,60 +1,83 @@
 import axios from 'axios'
 import history from '../history'
 
-export const RECEIVE_ARTICLES = 'GET_ARTICLES'
-export const ADD_ARTICLE = 'ADD_ARTICLE'
-export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
-export const REMOVE_ARTICLE = 'REMOVE_ARTICLE'
-export const UPDATE_ARTICLE = 'UPDATE_ARTICLE'
-export const REPLACE_ARTICLE = 'REPLACE_ARTICLE'
+export const RECEIVE_BOOKS = 'GET_BOOKS'
+export const ADD_BOOK = 'ADD_BOOK'
+export const RECEIVE_BOOK = 'RECEIVE_BOOK'
+export const REMOVE_BOOK = 'REMOVE_BOOK'
+export const UPDATE_BOOK = 'UPDATE_BOOK'
+export const REPLACE_BOOK = 'REPLACE_BOOK'
 
-const apiUrl = 'http://localhost:3001/api/articles'
+const apiUrl = 'https://ifpj1qamaa.execute-api.us-east-1.amazonaws.com/prod'
 
-export const getArticles = () => dispatch => axios.get(`${apiUrl}.json`)
+
+export const getBooks = () => dispatch => axios.get(`${apiUrl}/books`)
 	.then(response => {
-		dispatch({ type: RECEIVE_ARTICLES, articles: response.data, })
+		dispatch({ type: RECEIVE_BOOKS, books: response.data, })
 	})
 	.catch(error => { throw (error) })
 
-export const addArticle = ({ title, content, }) => dispatch => axios.post(`${apiUrl}.json`, { title, content, })
+export const addBook = ({
+	title, description, author, tags,
+}) => dispatch => axios.post(`${apiUrl}/books`, {
+	title, description, author, tags,
+})
 	.then(response => {
 		const data = response.data
-		dispatch({ type: ADD_ARTICLE, payload: { id: data.id, title: data.title, content: data.content, }, })
+		console.log({ data, })
+		dispatch({
+			type: ADD_BOOK,
+			payload: {
+				id: data.id, title: data.title, description: data.description, author: data.author, tags: data.tags,
+			},
+		})
 	})
 	.then(() => {
-		history.push("/articles")
+		history.push("/books")
 	})
 	.catch(error => { throw (error) })
 
-export const getArticle = id => dispatch => axios.get(`${apiUrl}/${id}.json`)
+export const getBook = id => dispatch => axios.get(`${apiUrl}/books/${id}`)
 	.then(response => {
-		dispatch({ type: RECEIVE_ARTICLE, article: response.data, })
+		dispatch({ type: RECEIVE_BOOK, book: response.data, })
 	})
 	.catch(error => {
 		throw (error)
 	})
 
-export const deleteArticle = id => dispatch => axios.delete(`${apiUrl}/${id}.json`)
+export const deleteBook = id => dispatch => axios.delete(`${apiUrl}/books/${id}`)
 	.then(response => {
-		dispatch({ type: REMOVE_ARTICLE, payload: { id, }, })
+		dispatch({ type: REMOVE_BOOK, payload: { id, }, })
 	})
 	.then(() => {
-		history.push("/articles")
+		history.push("/books")
 	})
 	.catch(error => {
 		throw (error)
 	})
 
-export const updateArticle = article => {
-	const articleId = article.id
-	return dispatch => axios.patch(`${apiUrl}/${article.id}.json`, { title: article.title, content: article.content, })
+export const updateBook = book => {
+	const bookId = book.id
+	return dispatch => axios.patch(`${apiUrl}/books/${book.id}`, {
+		title: book.title, description: book.description, author: book.author, tags: book.tags,
+	})
 		.then(response => {
 			const data = response.data
-			dispatch({ type: UPDATE_ARTICLE, payload: { id: data.id, title: data.title, content: data.content, }, })
-			dispatch({ type: REPLACE_ARTICLE, payload: { id: data.id, title: data.title, content: data.content, }, })
+			dispatch({
+				type: UPDATE_BOOK,
+				payload: {
+					id: data.id, title: data.title, description: data.description, author: data.author, tags: data.tags,
+				},
+			})
+			dispatch({
+				type: REPLACE_BOOK,
+				payload: {
+					id: data.id, title: data.title, description: data.description, author: data.author, tags: data.tags,
+				},
+			})
 		})
 		.then(() => {
-			history.push(`/articles/${articleId}`)
+			history.push(`/books/${bookId}`)
 		})
 		.catch(error => { throw (error) })
 }

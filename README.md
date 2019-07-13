@@ -7,9 +7,9 @@ This is a React with Redux and React-Router application.
 Initial setup was with create-react-app.
 It performs Creat-Read-Update-Delete commands on a database through an API.
 The API is a local server-side application running on port 3001.
-http://localhost:3001/articles.
+http://localhost:3001/book.
 
-The API was created as a separate application and can be found at: https://github.com/steve981cr/articles-api
+The API was created as a separate application and can be found at: https://github.com/steve981cr/book-api
 
 To run the application first run the API's server. If using a Rails API:
 rails server -p 3001
