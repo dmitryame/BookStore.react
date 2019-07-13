@@ -8,7 +8,9 @@ export default function booksReducer(state = initialState, action) {
 		case RECEIVE_BOOKS:
 			return action.books
 		case ADD_BOOK:
-			return [action.payload, ...state, ];
+			return [
+				action.payload, ...state,
+			]
 		case REMOVE_BOOK:
 			return state.filter(book => book.id !== action.payload.id)
 		case REPLACE_BOOK:
@@ -17,7 +19,9 @@ export default function booksReducer(state = initialState, action) {
 					return {
 						...book,
 						title: action.payload.title,
-						content: action.payload.content,
+						description: action.payload.description,
+						author: action.payload.author,
+						tags: action.payload.tags,
 					}
 				} return book
 			})

@@ -9,11 +9,16 @@ class BookInfo extends Component {
 	}
 
 	render() {
-		const book = this.props.book
+		const { book, } = this.props
+		if (!book) {
+			return <div />
+		}
 		return (
 			<div>
-				<h2>{book.id}: {book.title}</h2>
-				<p>{book.content}</p>
+				<h2>{book.title}</h2>
+				<p>{book.author}</p>
+				<p>{book.description}</p>
+				<p>{book.tags}</p>
 				<div className="btn-group">
 					<Link to={{ pathname: `/books/${book.id}/edit`, state: { book, }, }} className="btn btn-info">Edit</Link>
 					<button className="btn btn-danger" type="button" onClick={() => this.props.deleteBook(book.id)}>Delete</button>
@@ -25,7 +30,7 @@ class BookInfo extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ book: state.book, })
+const mapStateToProps = state => ({ book: state.book.book, })
 
 const mapDispatchToProps = { getBook, deleteBook, }
 

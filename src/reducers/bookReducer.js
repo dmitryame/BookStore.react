@@ -8,7 +8,9 @@ export default function bookReducer(state = {}, action) {
 			return {
 				id: action.id,
 				title: action.payload.title,
-				content: action.payload.content,
+				description: action.payload.description,
+				author: action.payload.author,
+				tags: action.payload.tags,
 			}
 		default:
 			return state
