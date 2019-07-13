@@ -12,7 +12,7 @@ export default function booksReducer(state = initialState, action) {
 				action.payload, ...state,
 			]
 		case REMOVE_BOOK:
-			return state.filter(book => book.id !== action.payload.id)
+			return state.books.filter(book => book.id !== action.payload.id)
 		case REPLACE_BOOK:
 			return state.books.map(book => {
 				if (book.id === action.payload.id) {
